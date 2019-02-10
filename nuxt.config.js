@@ -1,24 +1,24 @@
 module.exports = {
   mode: 'universal',
   loading: false,
+  modern: true,
   plugins: [
-    { src: '~/plugins/firebase', ssr: true },
-    { src: '~/plugins/element-ui', ssr: true }
+    '~/plugins/firebase.js'
   ],
   build: {
     publicPath: '/client/'
   },
   env: {
     firebase: {
-      apiKey: "AIzaSyBZnuWppDsGFuAwiSiOTcoZm03AJLXh7sw",
-      authDomain: "mikuappend.com",
-      databaseURL: "https://hecateball-4628e.firebaseio.com",
-      projectId: "hecateball-4628e",
-      storageBucket: "hecateball-4628e.appspot.com",
-      messagingSenderId: "117844882498"
+      apiKey: "AIzaSyDGLoAm_vG9GO_82zxKRtWpHHb4Eby5jGY",
+      authDomain: "flake-me.firebaseapp.com",
+      databaseURL: "https://flake-me.firebaseio.com",
+      projectId: "flake-me",
+      storageBucket: "flake-me.appspot.com",
+      messagingSenderId: "434647058224"
     }
   },
   head: {
-    title: 'Firebase + Nuxt.js'
+    title: 'Flake'
   }
 }
