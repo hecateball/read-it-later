@@ -8,6 +8,8 @@
   "author": "hecateball",
   "dependencies": {
     "firebase": "^5.8.2",
-    "nuxt": "^2.4.3"
+    "nuxt": "^2.4.3",
+    "ogp-parser": "^0.4.3",
+    "uikit": "^3.0.3"
   }
 }

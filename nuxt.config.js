@@ -3,10 +3,12 @@ module.exports = {
   loading: false,
   modern: true,
   plugins: [
-    '~/plugins/firebase.js'
+    '~/plugins/firebase.js',
+    '~/plugins/uikit.client.js'
   ],
   build: {
-    publicPath: '/client/'
+    publicPath: '/client/',
+    quiet: false
   },
   env: {
     firebase: {
@@ -19,6 +21,10 @@ module.exports = {
     }
   },
   head: {
-    title: 'Flake'
-  }
+    title: 'Flake',
+    meta: [
+      { name: 'viewport', content: 'width=device-width,initial-scale=1' }
+    ]
+  },
+  css: ['uikit/dist/css/uikit.css']
 }

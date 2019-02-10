@@ -1,8 +1,16 @@
 <template>
-  <el-container>
-    <el-header>
-      <h1>Firebase + Nuxt.js Sample</h1>
-    </el-header>
-    <nuxt/>
-  </el-container>
+  <div class="uk-section">
+    <navigation />
+    <nuxt />
+  </div>
 </template>
+
+<script>
+import Navigation from '~/components/navigation'
+
+export default {
+  components: {
+    Navigation
+  }
+}
+</script>
