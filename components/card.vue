@@ -2,7 +2,7 @@
   <a :href="url">
     <div class="uk-card uk-card-default">
       <div v-if="image" class="uk-card-media-top">
-        <img :src="image.src" alt="image.alt">
+        <img :src="image.src" :alt="image.alt">
       </div>
       <div class="uk-card-body">
         <h3 class="uk-card-title">{{ title }}</h3>
@@ -13,7 +13,8 @@
 </template>
 
 <script>
-import parse from 'ogp-parser'
+import firebase from 'firebase/app'
+import 'firebase/functions'
 
 export default {
   props: {
@@ -30,14 +31,11 @@ export default {
     }
   },
   beforeMount: async function() {
-    const { title, ogp } = await parse(this.url, true)
-    console.log(response)
-    this.title = title
-    this.image = ogp['og:image:secure_url'] || ogp['og:image'] ? {
-      src: ogp['og:image:secure_url'] ? ogp['og:image:secure_url'] : ogp['og:image'],
-      alt: ogp['og:image:alt'] ? ogp['og:image:alt'] : ''
-    } : null
-    this.description = ogp['og:description'] ? ogp['og:description'] : null
+    const result = await firebase.app()
+      .functions('asia-northeast1').httpsCallable('openGraph')({ url: this.url })
+    this.title = result.data.title
+    this.image = result.data.image
+    this.description = result.data.description
   }
 }
 </script>

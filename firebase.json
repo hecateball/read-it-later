@@ -5,9 +5,10 @@
   "functions": {
     "source": "functions",
     "predeploy": [
-      "npm run build -- --quiet",
-      "cp -r static/ .nuxt/dist/",
+      "npm run build",
+      "npm --prefix functions run clean",
       "npm --prefix functions run build",
+      "cp -r static/ .nuxt/dist/",
       "rsync -ac .nuxt/ functions/.nuxt/"
     ]
   },
