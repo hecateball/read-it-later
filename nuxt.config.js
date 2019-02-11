@@ -2,8 +2,12 @@ module.exports = {
   mode: 'universal',
   loading: false,
   modern: true,
+  modules: [
+    '@nuxtjs/pwa'
+  ],
   plugins: [
     '~/plugins/firebase.js',
+    '~/plugins/firebase.client.js',
     '~/plugins/uikit.client.js'
   ],
   build: {
@@ -26,5 +30,13 @@ module.exports = {
       { name: 'viewport', content: 'width=device-width,initial-scale=1' }
     ]
   },
-  css: ['uikit/dist/css/uikit.css']
+  css: ['uikit/dist/css/uikit.css'],
+  manifest: {
+    name: 'Read It Later',
+    lang: 'ja',
+    short_name: 'ReadItLater',
+    title: 'Read It Later',
+    theme_color: '#ffffff',
+    background_color: '#ffffff'
+  }
 }

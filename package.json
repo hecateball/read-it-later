@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "nuxt",
-    "build": "nuxt build --modern"
+    "build": "nuxt build"
   },
   "author": "hecateball",
   "dependencies": {
@@ -11,5 +11,8 @@
     "nuxt": "^2.4.3",
     "ogp-parser": "^0.4.3",
     "uikit": "^3.0.3"
+  },
+  "devDependencies": {
+    "@nuxtjs/pwa": "^3.0.0-beta.6"
   }
 }

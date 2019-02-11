@@ -1,6 +1,6 @@
 <template>
   <nav class="uk-navbar-container" uk-navbar>
-    <ul class="uk-child-width-expand uk-margin-remove-vertical" uk-tab>
+    <ul class="uk-margin-remove-vertical" uk-tab>
       <li v-for="(tab, index) in tabs" :key="index" :class="{ 'uk-active': tab.active }">
         <n-link :to="tab.destination">{{ tab.label }}</n-link>
       </li>

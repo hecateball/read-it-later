@@ -1,15 +1,23 @@
 <template>
-  <div class="uk-padding-small uk-margin-medium-top">
-    <simple-article class="uk-margin-small" v-for="(url, index) in urls" :key="index" :url="url"/>
+  <div>
+    <div class="uk-padding-small uk-margin-medium-top">
+      <simple-article class="uk-margin-small" v-for="(url, index) in urls" :key="index" :url="url"/>
+    </div>
+    <no-ssr>
+      <input-form v-if="authenticated" class="uk-position-bottom-right uk-position-fixed uk-position-z-index uk-margin-bottom uk-margin-right" />
+    </no-ssr>
   </div>
 </template>
 
 <script>
 import SimpleArticle from '~/components/organisms/simple-article'
+import InputForm from '~/components/organisms/input-form'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
-    SimpleArticle
+    SimpleArticle,
+    InputForm
   },
   data: function() {
     return {
@@ -19,6 +27,7 @@ export default {
         'https://togetter.com/li/1317522'
       ]
     }
-  }
+  },
+  computed: mapGetters({ authenticated: 'authenticated' })
 }
 </script>

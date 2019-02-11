@@ -6,6 +6,10 @@ node_modules/
 
 # Firebase
 .firebase/
+firebase-debug.log
 
 # Functions
-functionslib//
+functions/lib/
+
+# Generated Service Worker
+sw.js

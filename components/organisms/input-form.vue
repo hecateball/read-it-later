@@ -1,5 +1,5 @@
 <template>
-  <div class="uk-inline uk-margin-small-bottom uk-margin-small-right">
+  <div class="uk-inline">
     <form @submit.prevent="submit">
       <button type="submit" class="uk-icon uk-form-icon uk-form-icon-flip" uk-icon="icon: plus"></button>
       <input class="uk-input" type="text" placeholder="https://..." v-model="url" />

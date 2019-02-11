@@ -1,17 +1,17 @@
 export const strict = false
 
 export const state = () => ({
-  currentUser: null
+  authenticated: false
 })
 
 export const mutations = {
-  currentUser: (state, currentUser) => state.currentUser = currentUser
+  authenticated: (state, authenticated) => state.authenticated = authenticated
 }
 
 export const getters = {
-  currentUser: (state) => state.currentUser
+  authenticated: (state) => state.authenticated
 }
 
 export const actions = {
-  currentUser: ({ commit }, currentUser) => commit('currentUser', currentUser)
+  authenticated: ({ commit }, authenticated) => commit('authenticated', authenticated)
 }
