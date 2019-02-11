@@ -1,15 +1,21 @@
 <template>
-  <a :href="url">
-    <div class="uk-card uk-card-default">
-      <div v-if="image" class="uk-card-media-top">
-        <img :src="image.src" :alt="image.alt">
-      </div>
+  <article v-if="image" class="uk-card uk-card-default" :data-src="image.src" uk-img>
+    <a class="uk-link-reset" :href="url">
+      <section class="uk-card-body uk-overlay-default">
+        <h1 class="uk-card-title uk-h4">{{ title }}</h1>
+        <p v-if="description">{{ description }}</p>
+        <div class="uk-text-meta uk-text-truncate">{{ url }}</div>
+      </section>
+    </a>
+  </article>
+  <div v-else class="uk-card uk-card-default">
+    <a class="uk-link-reset" :href="url">
       <div class="uk-card-body">
         <h3 class="uk-card-title">{{ title }}</h3>
         <p v-if="description" >{{ description }}</p>
       </div>
-    </div>
-  </a>
+    </a>
+  </div>
 </template>
 
 <script>
@@ -39,3 +45,10 @@ export default {
   }
 }
 </script>
+
+<style>
+canvas {
+  width: 50%;
+  height: auto;
+}
+</style>
