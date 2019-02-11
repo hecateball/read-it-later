@@ -8,20 +8,20 @@ module.exports = {
   ],
   build: {
     publicPath: '/client/',
-    quiet: false
+    quiet: process.env.GCLOUD_PROJECT === 'mikuappend-jp'
   },
   env: {
     firebase: {
-      apiKey: "AIzaSyDGLoAm_vG9GO_82zxKRtWpHHb4Eby5jGY",
-      authDomain: "flake-me.firebaseapp.com",
-      databaseURL: "https://flake-me.firebaseio.com",
-      projectId: "flake-me",
-      storageBucket: "flake-me.appspot.com",
-      messagingSenderId: "434647058224"
+      apiKey: 'AIzaSyBOY61vdiNM6FIK6vmfYOAGU2IwOEvb8Gw',
+      authDomain: 'mikuappend-jp.firebaseapp.com',
+      databaseURL: 'https://mikuappend-jp.firebaseio.com',
+      projectId: 'mikuappend-jp',
+      storageBucket: 'mikuappend-jp.appspot.com',
+      messagingSenderId: '473622708887'
     }
   },
   head: {
-    title: 'Flake',
+    title: 'Read It Later',
     meta: [
       { name: 'viewport', content: 'width=device-width,initial-scale=1' }
     ]
