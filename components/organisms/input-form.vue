@@ -1,9 +1,8 @@
 <template>
   <div class="uk-inline uk-margin-small-bottom uk-margin-small-right">
     <form @submit.prevent="submit">
-      <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: plus" @click="submit"></span>
+      <button type="submit" class="uk-icon uk-form-icon uk-form-icon-flip" uk-icon="icon: plus"></button>
       <input class="uk-input" type="text" placeholder="https://..." v-model="url" />
-      <input type="submit" data-role="none" style="visibility: hidden; position: absolute;" />
     </form>
   </div>
 </template>
