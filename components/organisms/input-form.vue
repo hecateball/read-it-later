@@ -3,6 +3,7 @@
     <form @submit.prevent="submit">
       <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: plus" @click="submit"></span>
       <input class="uk-input" type="text" placeholder="https://..." v-model="url" />
+      <input type="submit" data-role="none" style="visibility: hidden; position: absolute;" />
     </form>
   </div>
 </template>

@@ -5,9 +5,7 @@ node_modules/
 .nuxt
 
 # Firebase
-.firebaserc
 .firebase/
-firebase-debug.log*
 
 # Functions
-functions/lib/
+functionslib//
