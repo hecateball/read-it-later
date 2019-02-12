@@ -23,7 +23,7 @@ export default {
     return {
       urls: [
         'https://itunes.apple.com/jp/story/id1296490350',
-        'https://www.melonbooks.co.jp/detail/detail.php?product_id=472076&utm_source=twitter_190211&utm_medium=215001036346',
+        'https://twitter.com/horodamsmr/status/1095011949522251777',
         'https://togetter.com/li/1317522'
       ]
     }

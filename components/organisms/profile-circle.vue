@@ -1,6 +1,8 @@
 <template>
-  <icon-button v-if="authenticated" />
-  <sign-in-button v-else />
+  <div class="profile-circle">
+    <icon-button v-if="authenticated" />
+    <sign-in-button v-else />
+  </div>
 </template>
 
 <script>
@@ -17,3 +19,22 @@ export default {
 }
 </script>
 
+<style scoped>
+.profile-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #F5F8FA;
+  box-shadow: 1px 1px 2px;
+  transition: .1s ease-in-out;
+  transition-property: background-color;
+}
+
+.profile-circle:focus, .profile-circle:hover {
+  background: #E1E8ED;
+}
+
+.profile-circle:active {
+  background: #AAB8C2;
+}
+</style>

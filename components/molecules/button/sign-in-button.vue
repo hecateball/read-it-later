@@ -1,5 +1,5 @@
 <template>
-  <button class="uk-icon-button" uk-icon="twitter" @click="signIn"></button>
+  <img class="sign-in-button" src="/svg/twitter-logo.svg" alt="Twitter Logo Blue" @click="signIn" />
 </template>
 
 <script>
@@ -26,7 +26,7 @@ export default {
 </script>
 
 <style scoped>
-.uk-icon-button {
-  box-shadow: 1px 1px 2px;
+.sign-in-button {
+  padding: 4px;
 }
 </style>

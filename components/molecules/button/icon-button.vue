@@ -1,5 +1,5 @@
 <template>
-  <div class="uk-icon-button" :data-src="src" uk-img></div>
+  <img class="icon-button" :src="image.src" :alt="image.alt" />
 </template>
 
 <script>
@@ -9,15 +9,19 @@ import 'firebase/auth'
 export default {
   data: function() {
     return {
-      src: firebase.auth().currentUser.photoURL
+      image: {
+        src: firebase.auth().currentUser.photoURL,
+        alt: firebase.auth().currentUser.displayName
+      }
     }
   }
 }
 </script>
 
 <style scoped>
-.uk-icon-button {
-  background-size: cover;
-  box-shadow: 1px 1px 2px;
+.icon-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
 }
 </style>
