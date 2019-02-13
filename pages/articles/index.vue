@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="article-container">
-      <simple-article class="article" v-for="(url, index) in urls" :key="index" :url="url"/>
+    <div class="article-container" v-if="articles.length">
+      <simple-article class="article" v-for="article in articles" :key="article.id" :article="article"/>
     </div>
     <no-ssr>
       <input-form v-if="authenticated" class="input-form" />
@@ -13,6 +13,9 @@
 import SimpleArticle from '~/components/organisms/simple-article'
 import InputForm from '~/components/organisms/input-form'
 import { mapGetters } from 'vuex'
+import firebase from 'firebase/app'
+import 'firebase/auth'
+import 'firebase/firestore'
 
 export default {
   components: {
@@ -21,14 +24,19 @@ export default {
   },
   data: function() {
     return {
-      urls: [
-        'https://itunes.apple.com/jp/story/id1296490350',
-        'https://twitter.com/horodamsmr/status/1095011949522251777',
-        'https://togetter.com/li/1317522'
-      ]
+      articles: []
     }
   },
-  computed: mapGetters({ authenticated: 'authenticated' })
+  computed: mapGetters({ authenticated: 'authenticated' }),
+  mounted: async function() {
+    if (this.authenticated) {
+      const unsubscribe = firebase.firestore()
+        .collection(`versions/v1/users/${firebase.auth().currentUser.uid}/articles`)
+        .orderBy('createdAt', 'desc')
+        .onSnapshot(({ docs }) => this.articles = docs)
+      this.$once('hook:beforeDestroy', unsubscribe)
+    }
+  }
 }
 </script>
 

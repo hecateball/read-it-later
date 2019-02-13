@@ -8,6 +8,10 @@
 </template>
 
 <script>
+import firebase from 'firebase/app'
+import 'firebase/auth'
+import 'firebase/firestore'
+
 export default {
   data: function() {
     return {
@@ -15,8 +19,20 @@ export default {
     }
   },
   methods: {
-    submit: function() {
-      console.log(this.url)
+    submit: async function() {
+      if (!firebase.auth().currentUser) {
+        return
+      }
+      await firebase.firestore()
+        .collection(`versions/v1/users/${firebase.auth().currentUser.uid}/articles`)
+        .add({
+          url: this.url,
+          title: '',
+          image: { url: '', alt: '' },
+          description: null,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+          updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        })
       this.url = ''
     }
   }

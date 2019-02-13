@@ -1,6 +1,6 @@
 <template>
-  <article class="uk-card uk-card-default" :data-src="image" uk-img>
-    <a class="uk-link-reset" :href="url">
+  <article class="uk-card uk-card-default" :data-src="image.url" uk-img>
+    <a class="uk-link-reset" :href="url" target="_blank">
       <section class="uk-card-body uk-overlay-default">
         <h1 class="uk-card-title uk-h4">{{ title }}</h1>
         <p v-if="description">{{ description }}</p>
@@ -12,28 +12,28 @@
 
 <script>
 import firebase from 'firebase/app'
-import 'firebase/functions'
+import 'firebase/firestore'
 
 export default {
   props: {
-    url: {
-      type: String,
+    article: {
+      type: firebase.firestore.DocumentSnapshot,
       required: true
     }
   },
-  data: function() {
-    return {
-      title: null,
-      image: null,
-      description: null,
-    }
-  },
-  beforeMount: async function() {
-    const result = await firebase.app()
-      .functions('asia-northeast1').httpsCallable('openGraph')({ url: this.url })
-    this.title = result.data.title
-    this.image = result.data.image.src
-    this.description = result.data.description
+  computed: {
+    url: function() {
+      return this.article.get('url')
+    },
+    title: function() {
+      return this.article.get('title').length !== 0 ? this.article.get('title') : 'Loading...'
+    },
+    image: function() {
+      return this.article.get('image')
+    },
+    description: function() {
+      return this.article.get('description')
+    },
   }
 }
 </script>
