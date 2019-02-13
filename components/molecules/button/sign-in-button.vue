@@ -1,12 +1,19 @@
 <template>
-  <img class="sign-in-button" src="/svg/twitter-logo.svg" alt="Twitter Logo Blue" @click="signIn" />
+  <!--<img class="sign-in-button" src="/svg/twitter-logo.svg" alt="Twitter Logo Blue" @click="signIn" />-->
+  <span class="sign-in-button" @click="signIn">
+    <twitter-logo />
+  </span>
 </template>
 
 <script>
+import TwitterLogo from '~/assets/svg/twitter-logo.svg'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 
 export default {
+  components: {
+    TwitterLogo
+  },
   methods: {
     signIn: async function() {
       const provider = new firebase.auth.TwitterAuthProvider()
@@ -25,8 +32,10 @@ export default {
 }
 </script>
 
-<style scoped>
-.sign-in-button {
+<style lang="scss" scoped>
+.sign-in-button * {
+  width: 100%;
+  height: auto;
   padding: 4px;
 }
 </style>

@@ -1,0 +1,9 @@
+$margin-small: 8px;
+$margin-medium: 16px;
+$margin-large: 24px;
+$margin-xlarge: 32px;
+
+@mixin margin-top($value:$margin-medium) { margin-top: $value }
+@mixin margin-bottom($value:$margin-medium) { margin-bottom: $value }
+@mixin margin-left($value:$margin-medium) { margin-left: $value }
+@mixin margin-right($value:$margin-medium) { margin-right: $value }

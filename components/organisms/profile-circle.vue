@@ -19,22 +19,17 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .profile-circle {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #F5F8FA;
   box-shadow: 1px 1px 2px;
   transition: .1s ease-in-out;
   transition-property: background-color;
-}
+  background: $extra-extra-light-gray;
 
-.profile-circle:focus, .profile-circle:hover {
-  background: #E1E8ED;
-}
-
-.profile-circle:active {
-  background: #AAB8C2;
+  &:focus, &:hover { background: $extra-light-gray }
+  &:active { background: $light-gray }
 }
 </style>

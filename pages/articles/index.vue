@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div class="uk-padding-small uk-margin-medium-top">
-      <simple-article class="uk-margin-small" v-for="(url, index) in urls" :key="index" :url="url"/>
+    <div class="article-container">
+      <simple-article class="article" v-for="(url, index) in urls" :key="index" :url="url"/>
     </div>
     <no-ssr>
-      <input-form v-if="authenticated" class="uk-position-bottom-right uk-position-fixed uk-position-z-index uk-margin-bottom uk-margin-right" />
+      <input-form v-if="authenticated" class="input-form" />
     </no-ssr>
   </div>
 </template>
@@ -31,3 +31,23 @@ export default {
   computed: mapGetters({ authenticated: 'authenticated' })
 }
 </script>
+
+<style lang="scss" scoped>
+.article-container {
+  @include margin-top($margin-xlarge);
+  padding: 16px; //TODO
+}
+
+.article {
+  @include margin-bottom($margin-small);
+  &+.article { @include margin-top($margin-small); }
+}
+
+.input-form {
+  @include position-bottom-right;
+  @include position-fixed;
+  @include position-z-index;
+  @include margin-bottom($margin-large);
+  @include margin-right($margin-large);
+}
+</style>

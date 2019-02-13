@@ -3,7 +3,9 @@ module.exports = {
   loading: false,
   modern: true,
   modules: [
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    '@nuxtjs/style-resources',
+    'nuxt-svg-loader'
   ],
   plugins: [
     '~/plugins/firebase.js',
@@ -13,6 +15,9 @@ module.exports = {
   build: {
     publicPath: '/client/',
     quiet: process.env.GCLOUD_PROJECT === 'mikuappend-jp'
+  },
+  styleResources: {
+    sass: [ '~/assets/scss/_import.scss' ]
   },
   env: {
     firebase: {

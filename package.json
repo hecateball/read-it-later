@@ -12,6 +12,10 @@
     "uikit": "^3.0.3"
   },
   "devDependencies": {
-    "@nuxtjs/pwa": "^3.0.0-beta.6"
+    "@nuxtjs/pwa": "^3.0.0-beta.6",
+    "@nuxtjs/style-resources": "^0.1.2",
+    "node-sass": "^4.11.0",
+    "nuxt-svg-loader": "^1.0.1",
+    "sass-loader": "^7.1.0"
   }
 }
