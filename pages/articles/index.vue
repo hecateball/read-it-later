@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import SimpleArticle from '~/components/organisms/simple-article'
-import InputForm from '~/components/organisms/input-form'
+import SimpleArticle from '~/components/organisms/article/simple-article'
+import InputForm from '~/components/molecules/article/input-form'
 import { mapGetters } from 'vuex'
 import firebase from 'firebase/app'
 import 'firebase/auth'
@@ -31,7 +31,7 @@ export default {
   mounted: async function() {
     if (this.authenticated) {
       const unsubscribe = firebase.firestore()
-        .collection(`versions/v1/users/${firebase.auth().currentUser.uid}/articles`)
+        .collection(`users/${firebase.auth().currentUser.uid}/articles`)
         .orderBy('createdAt', 'desc')
         .onSnapshot(({ docs }) => this.articles = docs)
       this.$once('hook:beforeDestroy', unsubscribe)

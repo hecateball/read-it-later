@@ -24,10 +24,10 @@ export default {
         return
       }
       await firebase.firestore()
-        .collection(`versions/v1/users/${firebase.auth().currentUser.uid}/articles`)
+        .collection(`users/${firebase.auth().currentUser.uid}/articles`)
         .add({
           url: this.url,
-          title: '',
+          title: 'Loading...',
           image: { url: '', alt: '' },
           description: null,
           createdAt: firebase.firestore.FieldValue.serverTimestamp(),

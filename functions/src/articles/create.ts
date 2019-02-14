@@ -3,7 +3,7 @@ import * as functions from 'firebase-functions'
 import * as parse from 'ogp-parser'
 
 module.exports = functions.region('asia-northeast1')
-  .firestore.document('versions/v1/users/{uid}/articles/{id}')
+  .firestore.document('users/{uid}/articles/{id}')
   .onCreate(async (snapshot) => {
     const { title, ogp } = await parse(snapshot.get('url'), true)
 

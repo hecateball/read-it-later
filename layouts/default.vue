@@ -2,7 +2,7 @@
   <div class="uk-section uk-inline uk-width-1-1 uk-padding-remove-vertical">
     <navigation class="uk-position-top uk-position-fixed uk-position-z-index" />
     <no-ssr>
-      <profile-circle class="profile-circle" />
+      <profile-circle class="profile" />
     </no-ssr>
     <nuxt />
   </div>
@@ -10,7 +10,7 @@
 
 <script>
 import Navigation from '~/components/organisms/navigation'
-import ProfileCircle from '~/components/organisms/profile-circle'
+import ProfileCircle from '~/components/molecules/profile/profile-circle'
 
 export default {
   components: {
@@ -21,7 +21,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.profile-circle {
+.profile {
   @include position-top-right;
   @include position-fixed;
   @include position-z-index;

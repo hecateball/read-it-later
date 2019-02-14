@@ -7,6 +7,9 @@ $extra-light-gray: #E1E8ED;
 $extra-extra-light-gray: #F5F8FA;
 $white: #FFFFFF;
 
-//position
+// common
 @import "position";
 @import "margin";
+@import "text";
+
+@import "component";

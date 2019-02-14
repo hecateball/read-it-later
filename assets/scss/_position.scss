@@ -26,3 +26,5 @@
 @mixin position-z-index($value:1) { z-index: $value; }
 
 @mixin position-fixed() { position: fixed; }
+
+@mixin position-absolute() { position: absolute; }
