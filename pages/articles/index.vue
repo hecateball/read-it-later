@@ -43,7 +43,7 @@ export default {
 <style lang="scss" scoped>
 .article-container {
   @include margin-top($margin-xlarge);
-  padding: 16px; //TODO
+  @include padding;
 }
 
 .article {

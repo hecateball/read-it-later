@@ -48,8 +48,18 @@ export default {
     open: function() {
       window.open(this.url, '_blank')
     },
-    archive: function() {
-      console.log('archive')
+    archive: async function() {
+      const batch = firebase.firestore().batch()
+      batch.set(firebase.firestore().collection(`users/${firebase.auth().currentUser.uid}/archives`).doc(), {
+        title: this.article.get('title'),
+        image: this.article.get('image'),
+        description:  this.article.get('description'),
+        url: this.article.get('url'),
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+      })
+      batch.delete(this.article.ref)
+      await batch.commit()
     }
   }
 }
