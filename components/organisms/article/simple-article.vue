@@ -92,6 +92,12 @@ export default {
   background: rgba(255, 255, 255, 0.8);
 }
 
+.title {
+  //reset uikit
+  margin-top: 0;
+  @include margin-bottom($margin-small);
+}
+
 .time {
   text-align: right;
 }
