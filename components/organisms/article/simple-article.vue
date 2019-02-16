@@ -1,10 +1,10 @@
 <template>
-  <article class="article" :style="{ backgroundImage: image.url ? `url(${image.url})` : 'none' }">
+  <article class="article" :style="{ backgroundImage: article.image.url ? `url(${article.image.url})` : 'none' }">
     <section class="main-section" @click="open">
-      <date-and-time :timestamp="createdAt"></date-and-time>
-      <article-title class="title">{{ title }}</article-title>
-      <article-description v-if="description" class="description" >{{ description }}</article-description>
-      <article-url>{{ url }}</article-url>
+      <date-and-time>{{ article.createdAt }}</date-and-time>
+      <article-title class="title">{{ article.title }}</article-title>
+      <article-description v-if="article.description" class="description" >{{ article.description }}</article-description>
+      <article-url>{{ article.url }}</article-url>
       <archive-button class="archive" @click.native.stop="archive" />
     </section>
   </article>
@@ -29,42 +29,36 @@ export default {
   },
   props: {
     article: {
-      type: firebase.firestore.DocumentSnapshot,
-      required: true
-    }
-  },
-  computed: {
-    url: function() {
-      return this.article.get('url')
-    },
-    title: function() {
-      return this.article.get('title')
-    },
-    image: function() {
-      return this.article.get('image')
-    },
-    description: function() {
-      return this.article.get('description')
-    },
-    createdAt: function() {
-      return this.article.get('createdAt', { serverTimestamps: 'estimate' })
+      type: Object,
+      required: true,
+      id: String,
+      url: String,
+      title: String,
+      description: String,
+      image: {
+        type: Object,
+        required: true,
+        url: String
+      },
+      createdAt: String,
     }
   },
   methods: {
     open: function() {
-      window.open(this.url, '_blank')
+      window.open(this.article.url, '_blank')
     },
     archive: async function() {
+      const user = firebase.firestore().doc(`users/${firebase.auth().currentUser.uid}`)
       const batch = firebase.firestore().batch()
-      batch.set(firebase.firestore().collection(`users/${firebase.auth().currentUser.uid}/archives`).doc(), {
-        title: this.article.get('title'),
-        image: this.article.get('image'),
-        description:  this.article.get('description'),
-        url: this.article.get('url'),
+      batch.set(user.collection('archives').doc(), {
+        title: this.article.title,
+        image: this.article.image,
+        description:  this.article.description,
+        url: this.article.url,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
         updatedAt: firebase.firestore.FieldValue.serverTimestamp()
       })
-      batch.delete(this.article.ref)
+      batch.delete(user.collection('articles').doc(this.article.id))
       await batch.commit()
     }
   }

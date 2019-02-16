@@ -13,30 +13,16 @@
 import SimpleArticle from '~/components/organisms/article/simple-article'
 import InputForm from '~/components/molecules/article/input-form'
 import { mapGetters } from 'vuex'
-import firebase from 'firebase/app'
-import 'firebase/auth'
-import 'firebase/firestore'
 
 export default {
   components: {
     SimpleArticle,
     InputForm
   },
-  data: function() {
-    return {
-      articles: []
-    }
+  computed: {
+    ...mapGetters({ authenticated: 'authenticated' }),
+    ...mapGetters('articles', { articles: 'articles' })
   },
-  computed: mapGetters({ authenticated: 'authenticated' }),
-  mounted: async function() {
-    if (this.authenticated) {
-      const unsubscribe = firebase.firestore()
-        .collection(`users/${firebase.auth().currentUser.uid}/articles`)
-        .orderBy('createdAt', 'desc')
-        .onSnapshot(({ docs }) => this.articles = docs)
-      this.$once('hook:beforeDestroy', unsubscribe)
-    }
-  }
 }
 </script>
 
