@@ -3,9 +3,8 @@
     <section class="main-section" @click="open">
       <date-and-time :timestamp="createdAt"></date-and-time>
       <article-title class="title">{{ title }}</article-title>
-      <article-description v-if="description" class="description" >{{ description }}</article-description>
+      <truncated-description v-if="description" class="description" >{{ description }}</truncated-description>
       <article-url>{{ url }}</article-url>
-      <archive-button class="archive" @click.native.stop="archive" />
     </section>
   </article>
 </template>
@@ -13,9 +12,8 @@
 <script>
 import ArticleTitle from '~/components/atoms/article/title'
 import DateAndTime from '~/components/atoms/article/date-and-time'
-import ArticleDescription from '~/components/atoms/article/description'
+import TruncatedDescription from '~/components/atoms/article/truncated-description'
 import ArticleUrl from '~/components/atoms/article/url'
-import ArchiveButton from '~/components/atoms/article/archive-button'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 
@@ -23,9 +21,8 @@ export default {
   components: {
     ArticleTitle,
     DateAndTime,
-    ArticleDescription,
-    ArticleUrl,
-    ArchiveButton
+    TruncatedDescription,
+    ArticleUrl
   },
   props: {
     article: {
@@ -53,19 +50,6 @@ export default {
   methods: {
     open: function() {
       window.open(this.url, '_blank')
-    },
-    archive: async function() {
-      const batch = firebase.firestore().batch()
-      batch.set(firebase.firestore().collection(`users/${firebase.auth().currentUser.uid}/archives`).doc(), {
-        title: this.article.get('title'),
-        image: this.article.get('image'),
-        description:  this.article.get('description'),
-        url: this.article.get('url'),
-        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-      })
-      batch.delete(this.article.ref)
-      await batch.commit()
     }
   }
 }
@@ -92,8 +76,10 @@ export default {
   background: rgba(255, 255, 255, 0.8);
 }
 
-.time {
-  text-align: right;
+.title {
+  //reset uikit
+  margin-top: 0;
+  @include margin-bottom($margin-small);
 }
 
 .description {

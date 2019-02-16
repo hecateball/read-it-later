@@ -1,20 +1,20 @@
 <template>
   <div>
     <div class="article-container" v-if="articles.length">
-      <simple-article class="article" v-for="article in articles" :key="article.id" :article="article"/>
+      <archived-article class="article" v-for="article in articles" :key="article.id" :article="article"/>
     </div>
   </div>
 </template>
 
 <script>
-import SimpleArticle from '~/components/organisms/article/simple-article'
+import ArchivedArticle from '~/components/organisms/article/archived-article'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
 
 export default {
   components: {
-    SimpleArticle
+    ArchivedArticle
   },
   data: function() {
     return {
