@@ -1,11 +1,13 @@
 <template>
   <article class="article" :style="{ backgroundImage: image.url ? `url(${image.url})` : 'none' }">
-    <section class="main-section" @click="open">
-      <date-and-time :timestamp="createdAt"></date-and-time>
-      <article-title class="title">{{ title }}</article-title>
-      <truncated-description v-if="description" class="description" >{{ description }}</truncated-description>
-      <article-url>{{ url }}</article-url>
-    </section>
+    <a :href="url" target="_blank" rel="noopener,nofollow,noreferer">
+      <section class="main-section">
+        <date-and-time :timestamp="createdAt"></date-and-time>
+        <article-title class="title">{{ title }}</article-title>
+        <truncated-description v-if="description" class="description" >{{ description }}</truncated-description>
+        <article-url>{{ url }}</article-url>
+      </section>
+    </a>
   </article>
 </template>
 
@@ -45,11 +47,6 @@ export default {
     },
     createdAt: function() {
       return this.article.get('createdAt', { serverTimestamps: 'estimate' })
-    }
-  },
-  methods: {
-    open: function() {
-      window.open(this.url, '_blank')
     }
   }
 }

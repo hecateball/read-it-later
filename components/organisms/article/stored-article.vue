@@ -1,12 +1,14 @@
 <template>
   <article class="article" :style="{ backgroundImage: article.image.url ? `url(${article.image.url})` : 'none' }">
-    <section class="main-section" @click="open">
-      <date-and-time>{{ article.createdAt }}</date-and-time>
-      <article-title class="title">{{ article.title }}</article-title>
-      <article-description v-if="article.description" class="description" >{{ article.description }}</article-description>
-      <article-url>{{ article.url }}</article-url>
-      <archive-button class="archive" @click.native.stop="archive" />
-    </section>
+    <a :href="article.url" target="_blank" rel="noopener,nofollow,noreferer">
+      <section class="main-section">
+        <date-and-time>{{ article.createdAt }}</date-and-time>
+        <article-title class="title">{{ article.title }}</article-title>
+        <article-description v-if="article.description" class="description" >{{ article.description }}</article-description>
+        <article-url>{{ article.url }}</article-url>
+        <archive-button class="archive" @click.native.stop="archive" />
+      </section>
+    </a>
   </article>
 </template>
 
@@ -44,9 +46,6 @@ export default {
     }
   },
   methods: {
-    open: function() {
-      window.open(this.article.url, '_blank')
-    },
     archive: async function() {
       const user = firebase.firestore().doc(`users/${firebase.auth().currentUser.uid}`)
       const batch = firebase.firestore().batch()
@@ -82,18 +81,10 @@ export default {
   background: rgba(255, 255, 255, 0.8);
 }
 
-.overlay {
-  background: rgba(255, 255, 255, 0.8);
-}
-
 .title {
   //reset uikit
   margin-top: 0;
   @include margin-bottom($margin-small);
-}
-
-.time {
-  text-align: right;
 }
 
 .description {

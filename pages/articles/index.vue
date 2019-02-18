@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="article-container" v-if="articles.length">
-      <simple-article class="article" v-for="article in articles" :key="article.id" :article="article"/>
+      <stored-article class="article" v-for="article in articles" :key="article.id" :article="article"/>
     </div>
     <no-ssr>
       <input-form v-if="authenticated" class="input-form" />
@@ -10,13 +10,13 @@
 </template>
 
 <script>
-import SimpleArticle from '~/components/organisms/article/simple-article'
+import StoredArticle from '~/components/organisms/article/stored-article'
 import InputForm from '~/components/molecules/article/input-form'
 import { mapGetters } from 'vuex'
 
 export default {
   components: {
-    SimpleArticle,
+    StoredArticle,
     InputForm
   },
   computed: {
