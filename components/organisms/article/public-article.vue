@@ -5,7 +5,7 @@
         <date-and-time>{{ article.createdAt }}</date-and-time>
         <article-title class="title">{{ article.title }}</article-title>
         <article-description v-if="article.description" class="description" >{{ article.description }}</article-description>
-        <article-url>{{ article.url }}</article-url>
+        <article-url class="url">{{ article.url }}</article-url>
         <article-footer class="footer" :src="src" :alt="user">stored by {{ user }}</article-footer>
       </section>
     </a>
@@ -65,13 +65,6 @@ export default {
   background-size: cover;
 }
 
-.footer {
-  @include position-absolute;
-  @include position-bottom-right;
-  @include padding-bottom($padding-small);
-  @include padding-right($padding-small);
-}
-
 .main-section {
   @include padding($padding-xlarge);
   background: rgba(255, 255, 255, 0.8);
@@ -86,5 +79,16 @@ export default {
 .description {
   @include margin-top;
   @include margin-bottom;
+}
+
+.url {
+  @include margin-bottom($margin-small);
+}
+
+.footer {
+  @include position-absolute;
+  @include position-bottom-right;
+  @include padding-bottom($padding-small);
+  @include padding-right($padding-small);
 }
 </style>

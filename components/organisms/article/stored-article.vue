@@ -5,7 +5,7 @@
         <date-and-time>{{ article.createdAt }}</date-and-time>
         <article-title class="title">{{ article.title }}</article-title>
         <article-description v-if="article.description" class="description" >{{ article.description }}</article-description>
-        <article-url>{{ article.url }}</article-url>
+        <article-url class="url">{{ article.url }}</article-url>
         <archive-button class="archive" @click.native.stop="archive" />
       </section>
     </a>
@@ -90,6 +90,10 @@ export default {
 .description {
   @include margin-top;
   @include margin-bottom;
+}
+
+.url {
+  @include margin-bottom($margin-small);
 }
 
 .archive {
