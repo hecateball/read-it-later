@@ -1,5 +1,9 @@
 service cloud.firestore {
   match /databases/{database}/documents {
+    match /articles/{article} {
+      allow read;
+    }
+
     match /users/{uid}/articles/{article} {
       allow read: if request.auth != null && request.auth.uid == uid;
       allow create: if request.auth != null && request.auth.uid == uid;
@@ -9,7 +13,6 @@ service cloud.firestore {
     match /users/{uid}/archives/{article} {
       allow read: if request.auth != null && request.auth.uid == uid;
       allow create: if request.auth != null && request.auth.uid == uid;
-      allow delete: if request.auth != null && request.auth.uid == uid;
     }
   }
 }

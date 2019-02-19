@@ -6,7 +6,7 @@
         <article-title class="title">{{ article.title }}</article-title>
         <article-description v-if="article.description" class="description" >{{ article.description }}</article-description>
         <article-url class="url">{{ article.url }}</article-url>
-        <article-footer class="footer" :src="src" :alt="user">stored by {{ user }}</article-footer>
+        <article-footer class="footer" :src="article.user.photoURL" :alt="article.user.displayName">stored by {{ article.user.displayName }}</article-footer>
       </section>
     </a>
   </article>
@@ -32,6 +32,11 @@ export default {
       type: Object,
       required: true,
       id: String,
+      user: {
+        type: Object,
+        displayName: String,
+        photoURL: String
+      },
       url: String,
       title: String,
       description: String,
@@ -41,13 +46,6 @@ export default {
         url: String
       },
       createdAt: String,
-    }
-  },
-  //TODO:
-  data: function () {
-    return {
-      user: 'みなみ',
-      src: 'https://pbs.twimg.com/profile_images/985477320872886272/VEVGAMGe_normal.jpg'
     }
   }
 }

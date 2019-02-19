@@ -8,15 +8,34 @@
 
 <script>
 import PublicArticle from '~/components/organisms/article/public-article'
-import InputForm from '~/components/molecules/article/input-form'
-import { mapGetters } from 'vuex'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 
 export default {
   components: {
-    PublicArticle,
-    InputForm
+    PublicArticle
   },
-  computed: mapGetters('articles', { articles: 'articles' }),
+  data: function() {
+    return {
+      articles: []
+    }
+  },
+  mounted: async function() {
+    const archives = await firebase.firestore()
+      .collection(`articles`)
+      .orderBy('createdAt', 'desc')
+      .get()
+    this.articles = archives.docs.map((snapshot) => ({
+      id: snapshot.id,
+      user: snapshot.get('user'),
+      url: snapshot.get('url'),
+      title: snapshot.get('title'),
+      description: snapshot.get('description'),
+      image: snapshot.get('image'),
+      createdAt: snapshot.get('createdAt', { serverTimestamps: 'estimate' }).toDate().toLocaleString('ja-JP')
+    }))
+  }
+
 }
 </script>
 
