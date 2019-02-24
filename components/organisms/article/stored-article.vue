@@ -1,18 +1,16 @@
 <template>
-  <article class="article" :style="{ backgroundImage: article.image.url ? `url(${article.image.url})` : 'none' }">
-    <a :href="article.url" target="_blank" rel="noopener,nofollow,noreferer">
-      <section class="main-section">
-        <date-and-time>{{ article.createdAt }}</date-and-time>
-        <article-title class="title">{{ article.title }}</article-title>
-        <article-description v-if="article.description" class="description" >{{ article.description }}</article-description>
-        <article-url class="url">{{ article.url }}</article-url>
-        <archive-button class="archive" @click.native.stop="archive" />
-      </section>
-    </a>
-  </article>
+  <article-card :image="article.image" :url="article.url">
+    <date-and-time>{{ article.createdAt }}</date-and-time>
+    <article-title v-if="article.title" class="title">{{ article.title }}</article-title>
+    <article-title v-else class="title">Loading...</article-title>
+    <article-description v-if="article.description" class="description" >{{ article.description }}</article-description>
+    <article-url class="url">{{ article.url }}</article-url>
+    <archive-button class="archive" @click.stop.native="archive" />
+  </article-card>
 </template>
 
 <script>
+import ArticleCard from '~/components/molecules/article/article-card'
 import ArticleTitle from '~/components/atoms/article/title'
 import DateAndTime from '~/components/atoms/article/date-and-time'
 import ArticleDescription from '~/components/atoms/article/description'
@@ -23,6 +21,7 @@ import 'firebase/firestore'
 
 export default {
   components: {
+    ArticleCard,
     ArticleTitle,
     DateAndTime,
     ArticleDescription,
@@ -65,22 +64,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.article {
-  position: relative;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-  transition: box-shadow 0.1s ease-in-out;
-  background: no-repeat;
-  background-size: cover;
-}
-
-.main-section {
-  @include padding($padding-xlarge);
-  background: rgba(255, 255, 255, 0.8);
-}
-
 .title {
   //reset uikit
   margin-top: 0;
@@ -101,5 +84,6 @@ export default {
   @include position-right;
   @include margin-bottom($margin-small);
   @include margin-right($margin-small);
+  z-index: 1;
 }
 </style>

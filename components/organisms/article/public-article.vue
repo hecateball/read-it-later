@@ -1,18 +1,15 @@
 <template>
-  <article class="article" :style="{ backgroundImage: article.image.url ? `url(${article.image.url})` : 'none' }">
-    <a :href="article.url" target="_blank" rel="noopener,nofollow,noreferer">
-      <section class="main-section">
-        <date-and-time>{{ article.createdAt }}</date-and-time>
-        <article-title class="title">{{ article.title }}</article-title>
-        <article-description v-if="article.description" class="description" >{{ article.description }}</article-description>
-        <article-url class="url">{{ article.url }}</article-url>
-        <article-footer class="footer" :src="article.user.photoURL" :alt="article.user.displayName">stored by {{ article.user.displayName }}</article-footer>
-      </section>
-    </a>
-  </article>
+  <article-card :image="article.image" :url="article.url">
+    <date-and-time>{{ article.createdAt }}</date-and-time>
+    <article-title class="title">{{ article.title }}</article-title>
+    <article-description v-if="article.description" class="description" >{{ article.description }}</article-description>
+    <article-url class="url">{{ article.url }}</article-url>
+    <article-footer class="footer" :src="article.user.photoURL" :alt="article.user.displayName">stored by {{ article.user.displayName }}</article-footer>
+  </article-card>
 </template>
 
 <script>
+import ArticleCard from '~/components/molecules/article/article-card'
 import ArticleTitle from '~/components/atoms/article/title'
 import DateAndTime from '~/components/atoms/article/date-and-time'
 import ArticleDescription from '~/components/atoms/article/description'
@@ -21,6 +18,7 @@ import ArticleFooter from '~/components/atoms/article/footer'
 
 export default {
   components: {
+    ArticleCard,
     ArticleTitle,
     DateAndTime,
     ArticleDescription,
@@ -45,7 +43,7 @@ export default {
         required: true,
         url: String
       },
-      createdAt: String,
+      createdAt: String
     }
   }
 }

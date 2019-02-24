@@ -27,8 +27,8 @@ export default {
         .collection(`users/${firebase.auth().currentUser.uid}/articles`)
         .add({
           url: this.url,
-          title: 'Loading...',
-          image: { url: '', alt: '' },
+          title: null,
+          image: null,
           description: null,
           createdAt: firebase.firestore.FieldValue.serverTimestamp(),
           updatedAt: firebase.firestore.FieldValue.serverTimestamp()

@@ -1,18 +1,41 @@
 service cloud.firestore {
+  function authenticated() {
+    return request.auth != null
+      && request.auth.token.firebase.sign_in_provider == 'twitter.com';
+  }
+
+  function isValidNewUserArticle(article) {
+    return article.keys().hasOnly(['url', 'title', 'image', 'description', 'createdAt', 'updatedAt'])
+      && article.keys().hasAll(['url', 'title', 'image', 'description', 'createdAt', 'updatedAt'])
+      && article.url is string
+      && article.title == null
+      && article.image == null
+      && article.description == null
+      && article.createdAt is timestamp
+      && article.updatedAt is timestamp;
+  }
+
   match /databases/{database}/documents {
     match /articles/{article} {
       allow read;
     }
 
     match /users/{uid}/articles/{article} {
-      allow read: if request.auth != null && request.auth.uid == uid;
-      allow create: if request.auth != null && request.auth.uid == uid;
-      allow delete: if request.auth != null && request.auth.uid == uid;
+      allow read: if authenticated()
+        && request.auth.uid == uid;
+      allow create: if authenticated()
+        && request.auth.uid == uid
+        && isValidNewUserArticle(request.resource.data)
+        && request.resource.data.url.matches('^https?://.+$')
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.updatedAt == request.time;
+      allow delete: if authenticated()
+        && request.auth.uid == uid;
     }
 
     match /users/{uid}/archives/{article} {
-      allow read: if request.auth != null && request.auth.uid == uid;
-      allow create: if request.auth != null && request.auth.uid == uid;
+      allow read: if authenticated() && request.auth.uid == uid;
+      allow create: if authenticated() && request.auth.uid == uid;
     }
   }
 }

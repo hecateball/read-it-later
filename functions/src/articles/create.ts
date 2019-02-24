@@ -14,8 +14,7 @@ module.exports = functions.region('asia-northeast1')
           : ogp['og:image'] ? ogp['og:image'][0] : null,
         alt: ogp['og:image:alt'] ? ogp['og:image:alt'][0] : ''
       },
-      description: ogp['og:description'] ? ogp['og:description'][0] : null,
-
+      description: ogp['og:description'] ? ogp['og:description'][0] : null
     }
 
     const user = await admin.auth().getUser(params.uid)

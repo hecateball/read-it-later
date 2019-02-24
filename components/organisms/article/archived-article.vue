@@ -1,17 +1,14 @@
 <template>
-  <article class="article" :style="{ backgroundImage: image.url ? `url(${image.url})` : 'none' }">
-    <a :href="url" target="_blank" rel="noopener,nofollow,noreferer">
-      <section class="main-section">
-        <date-and-time :timestamp="createdAt"></date-and-time>
-        <article-title class="title">{{ title }}</article-title>
-        <truncated-description v-if="description" class="description" >{{ description }}</truncated-description>
-        <article-url>{{ url }}</article-url>
-      </section>
-    </a>
-  </article>
+  <article-card :image="image" :url="url">
+    <date-and-time :timestamp="createdAt"></date-and-time>
+    <article-title class="title">{{ title }}</article-title>
+    <truncated-description v-if="description" class="description" >{{ description }}</truncated-description>
+    <article-url>{{ url }}</article-url>
+  </article-card>
 </template>
 
 <script>
+import ArticleCard from '~/components/molecules/article/article-card'
 import ArticleTitle from '~/components/atoms/article/title'
 import DateAndTime from '~/components/atoms/article/date-and-time'
 import TruncatedDescription from '~/components/atoms/article/truncated-description'
@@ -21,6 +18,7 @@ import 'firebase/firestore'
 
 export default {
   components: {
+    ArticleCard,
     ArticleTitle,
     DateAndTime,
     TruncatedDescription,
@@ -53,26 +51,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.article {
-  position: relative;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-  transition: box-shadow 0.1s ease-in-out;
-  background: no-repeat;
-  background-size: cover;
-}
-
-.main-section {
-  @include padding($padding-xlarge);
-  background: rgba(255, 255, 255, 0.8);
-}
-
-.overlay {
-  background: rgba(255, 255, 255, 0.8);
-}
-
 .title {
   //reset uikit
   margin-top: 0;
